@@ -34,10 +34,10 @@ namespace spic {
             void GravityScale(double newGravityScale);
             double GravityScale() const;
 
-            void BodyTypeRB(const spic::BodyType& bodyType);
+            void BodyTypeRB(spic::BodyType newBodyType);
             spic::BodyType BodyTypeRB() const;
 
-            RigidBody(double mass, double gravityScale, spic::BodyType bodyType);
+            RigidBody(double newMass, double newGravityScale, spic::BodyType newBodyType);
         private:
             double mass;
             double gravityScale;

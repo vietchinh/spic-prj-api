@@ -13,9 +13,7 @@ namespace spic {
      */
     class GameObject {
         public:
-
-            GameObject(std::string name, std::string tag, bool active, int layer);
-
+            GameObject(const std::string &newName,const std::string &newTag, bool newActive, int newLayer);
             /**
              * @brief Finds a GameObject by name and returns it.
              * @param name The name of the GameObject you want to find.
@@ -305,20 +303,19 @@ namespace spic {
 
             void addChild( GameObject* newGameObject);
 
-            void Name(std::string name);
+            void Name(const std::string &newName);
             std::string Name() const;
 
-            void Tag(std::string tag);
+            void Tag(const std::string &newTag);
             std::string Tag() const;
 
 
-            void Layer(int layer);
+            void Layer(int newLayer);
             int Layer() const;
 
             int Id() const { return id; }
             void Id(int newId) { id = newId; }
-
-    private:
+        private:
             std::string name;
             std::string tag;
             bool active;
@@ -328,7 +325,7 @@ namespace spic {
             std::vector<GameObject*> children;
             GameObject* parent;
             int id;
-        // ... more members
+            // ... more members
     };
 
 }

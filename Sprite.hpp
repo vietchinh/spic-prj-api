@@ -38,7 +38,7 @@ namespace spic {
             void SpriteSrc(const std::string& newSprite);
             std::string SpriteSrc() const;
 
-            Sprite(std::string  sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer);
+            Sprite(const std::string &newSprite, Color newColor, bool newFlipX, bool newFlipY, int newSortingLayer, int newOrderInLayer);
     };
 }
 

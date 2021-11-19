@@ -11,7 +11,7 @@ namespace spic {
      */
     class Animator : public Component {
         public:
-            Animator(int fps);
+            Animator(int newFps);
 
             /**
              * @brief Start playing the image sequence.
@@ -27,7 +27,7 @@ namespace spic {
              */
             void Stop();
 
-            void Fps(int fps);
+            void Fps(int newFps);
             int Fps() const;
 
         private:
