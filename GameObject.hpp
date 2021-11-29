@@ -8,7 +8,6 @@
 #include <memory>
 #include <iostream>
 #include <boost/range/algorithm/equal.hpp>
-#include <functional>
 
 namespace spic {
 
@@ -33,6 +32,8 @@ namespace spic {
              * @spicapi
              */
             static std::vector<std::shared_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+
+            static std::shared_ptr<GameObject> FindGameObjectWithComponent(int componentId);
 
             /**
              * @brief Returns one active GameObject tagged tag. Returns nullptr if no GameObject was found.
