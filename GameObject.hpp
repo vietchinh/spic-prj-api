@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include <functional>
 #include <boost/range/algorithm/equal.hpp>
 
 namespace spic {
