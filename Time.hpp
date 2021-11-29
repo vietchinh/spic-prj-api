@@ -28,9 +28,14 @@ namespace spic {
              */
             static void TimeScale(double newTimeScale);
 
-        private:
+            /**
+             * @brief Set delta time
+             */
+            static void SetDeltaTime(double newDeltaTime);
+    private:
             static double deltaTime;
             static double timeScale;
+
     };
 
 }
