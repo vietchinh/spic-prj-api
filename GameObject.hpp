@@ -54,13 +54,11 @@ namespace spic {
                         return false;
                     }
 
-                        auto test3 = std::is_same_v<T, decltype(*gameObject)>;
-
                     GameObject& gameObjectRefPtr = *gameObject;
 
                     return typeid(gameObjectRefPtr) == typeid(T) && (includeInactive || gameObject->Active());
                 };
-                auto test = spic::GameObject::gameObjects;
+
                 auto foundGameObject = std::find_if(spic::GameObject::gameObjects.begin(), spic::GameObject::gameObjects.end(), predicate);
 
                 if (foundGameObject == spic::GameObject::gameObjects.cend()) return nullptr;
