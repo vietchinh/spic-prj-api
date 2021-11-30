@@ -75,13 +75,7 @@ namespace spic {
             static std::vector<std::shared_ptr<GameObject>> FindObjectsOfType(bool includeInactive = false) {
                 std::vector<std::shared_ptr<spic::GameObject>> targetGameObjects;
                 std::function<bool(const std::shared_ptr<GameObject>& gameObject)> predicate = [&includeInactive](const std::shared_ptr<GameObject>& gameObject) {
-                    if(!gameObject){
-                        return false;
-                    }
-
-                    GameObject& gameObjectRefPtr = *gameObject;
-
-                    return typeid(gameObjectRefPtr) == typeid(T) && (includeInactive || gameObject->Active());
+                    return gameObject.get() && dynamic_cast<T*>(gameObject.get()) != nullptr && (includeInactive || gameObject->Active());
                 };
                 std::copy_if(spic::GameObject::gameObjects.begin(), spic::GameObject::gameObjects.end(), std::back_inserter(targetGameObjects), predicate);
 
