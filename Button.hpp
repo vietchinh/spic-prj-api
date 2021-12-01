@@ -11,7 +11,11 @@ namespace spic {
      */
     class Button : public UIObject {
         public:
-            /**
+        explicit Button(const std::vector<std::shared_ptr<Component>> &components, const std::string &parentName,
+                        const std::string &name, const std::string &tag, bool active, int layer, double width,
+                        double height, std::function<void()> callback);
+
+        /**
              * @brief This function is called when the button is clicked, which
              *        will trigger a call to the registered onClick member.
              * @spicapi
@@ -25,6 +29,8 @@ namespace spic {
              * @spicapi
              */
             void OnClick(std::function<void()> callback) { onClick = callback; }
+
+            bool isInteractable() const;
 
         private:
             /**
