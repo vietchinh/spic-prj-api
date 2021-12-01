@@ -49,13 +49,22 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            static std::shared_ptr<T> FindObjectOfType(bool includeInactive = false) {
-                std::vector<std::shared_ptr<T>> foundObjectsOfType = FindObjectsOfType<T>(includeInactive).front();
+            static std::shared_ptr<GameObject> FindObjectOfType(bool includeInactive = false) {
+                std::function<bool(const std::shared_ptr<GameObject>& gameObject)> predicate = [&includeInactive](const std::shared_ptr<GameObject>& gameObject) {
+                    if(!gameObject){
+                        return false;
+                    }
 
-                if (foundObjectsOfType.empty()) return nullptr;
+                    GameObject& gameObjectRefPtr = *gameObject;
 
+                    return typeid(gameObjectRefPtr) == typeid(T) && (includeInactive || gameObject->Active());
+                };
 
-                return foundObjectsOfType.front();
+                auto foundGameObject = std::find_if(spic::GameObject::gameObjects.begin(), spic::GameObject::gameObjects.end(), predicate);
+
+                if (foundGameObject == spic::GameObject::gameObjects.cend()) return nullptr;
+
+                return *foundGameObject;
             }
 
             /**
@@ -63,19 +72,14 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            static std::vector<std::shared_ptr<T>> FindObjectsOfType(bool includeInactive = false) {
+            static std::vector<std::shared_ptr<GameObject>> FindObjectsOfType(bool includeInactive = false) {
                 std::vector<std::shared_ptr<spic::GameObject>> targetGameObjects;
                 std::function<bool(const std::shared_ptr<GameObject>& gameObject)> predicate = [&includeInactive](const std::shared_ptr<GameObject>& gameObject) {
                     return gameObject.get() && dynamic_cast<T*>(gameObject.get()) != nullptr && (includeInactive || gameObject->Active());
                 };
                 std::copy_if(spic::GameObject::gameObjects.begin(), spic::GameObject::gameObjects.end(), std::back_inserter(targetGameObjects), predicate);
 
-                if (targetGameObjects.empty()) return std::vector<std::shared_ptr<T>>{};
-
-                std::vector<std::shared_ptr<T>> convertedGameObjects;
-                std::transform(targetGameObjects.cbegin(), targetGameObjects.cend(), std::back_inserter(convertedGameObjects), [](const std::shared_ptr<GameObject>& gameObject) { return std::dynamic_pointer_cast<T>(gameObject); });
-
-                return convertedGameObjects;
+                return targetGameObjects;
             }
 
             /**
@@ -140,7 +144,7 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            void AddComponent(std::shared_ptr<T> component) {
+            void AddComponent(std::shared_ptr<Component> component) {
                 components.emplace_back(std::move(component));
             }
 
@@ -151,12 +155,19 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            [[nodiscard]] std::shared_ptr<T> GetComponent() const {
-                std::vector<std::shared_ptr<T>> foundComponents = GetComponents<T>();
+            [[nodiscard]] std::shared_ptr<Component> GetComponent() const {
+                for(const std::shared_ptr<Component>& component: components){
+                    if(!component){
+                        continue;
+                    }
 
-                if (foundComponents.empty()) return nullptr;
+                    Component& componentRefPtr = *component;
 
-                return foundComponents.front();
+                    if(typeid(componentRefPtr) == typeid(T)){
+                        return component;
+                    }
+                }
+                return nullptr;
             }
 
 
@@ -196,16 +207,11 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            [[nodiscard]] std::vector<std::shared_ptr<T>> GetComponents() const {
+            [[nodiscard]] std::vector<std::shared_ptr<Component>> GetComponents() const {
                 std::vector<std::shared_ptr<Component>> foundComponents;
                 std::copy_if(components.cbegin(), components.cend(), std::back_inserter(foundComponents), [](const std::shared_ptr<Component>& component) { return component.get() && dynamic_cast<T*>(component.get()) != nullptr; });
 
-                if (foundComponents.empty()) return std::vector<std::shared_ptr<T>>{};
-
-                std::vector<std::shared_ptr<T>> convertedComponents;
-                std::transform(foundComponents.cbegin(), foundComponents.cend(), std::back_inserter(convertedComponents), [](const std::shared_ptr<Component>& component) { return std::dynamic_pointer_cast<T>(component); });
-
-                return convertedComponents;
+                return foundComponents;
             }
 
             /**
@@ -216,12 +222,12 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            [[nodiscard]] std::vector<std::shared_ptr<T>> GetComponentsInChildren() const {
-                std::vector<std::shared_ptr<T>> foundComponents;
+            [[nodiscard]] std::vector<std::shared_ptr<Component>> GetComponentsInChildren() const {
+                std::vector<std::shared_ptr<Component>> foundComponents;
 
                 for(const std::shared_ptr<GameObject>& child: GameObject::gameObjects) {
                     if (child->parent != nullptr && *child->parent == *this) {
-                        std::vector<std::shared_ptr<T>> childComponents = child->GetComponents<T>();
+                        std::vector<std::shared_ptr<Component>> childComponents = child->GetComponents<T>();
 
                         std::move(childComponents.cbegin(), childComponents.cend(), std::back_inserter(foundComponents));
                     }
@@ -238,8 +244,8 @@ namespace spic {
              * @spicapi
              */
             template<class T>
-            [[nodiscard]] std::vector<std::shared_ptr<T>> GetComponentsInParent() const {
-                return parent == nullptr ? std::vector<std::shared_ptr<T>>() : parent->GetComponents<T>();
+            [[nodiscard]] std::vector<std::shared_ptr<Component>> GetComponentsInParent() const {
+                return parent == nullptr ? std::vector<std::shared_ptr<Component>>() : parent->GetComponents<T>();
             }
 
             /**
