@@ -3,6 +3,7 @@
 
 #include "UIObject.hpp"
 #include <functional>
+#include <utility>
 
 namespace spic {
 
@@ -28,7 +29,7 @@ namespace spic {
              *        any kind of callable.
              * @spicapi
              */
-            void OnClick(std::function<void()> callback) { onClick = callback; }
+            void OnClick(std::function<void()> callback) { onClick = std::move(callback); }
 
             bool isInteractable() const;
 
