@@ -9,13 +9,14 @@ namespace spic {
     class BehaviourScript : public Component {
         public:
             /**
-             * @brief TODO
+             * @brief Setting up the behaviourscript. Is called when a scene is set as currentScene
              * @spicapi
              */
             virtual void OnStart();
 
             /**
-             * @brief TODO
+             * @brief Executes every game tick.
+             *        If behaviourscript is connected to a InputComponent, only executes if input is activated in gametick.
              * @spicapi
              */
             virtual void OnUpdate();
