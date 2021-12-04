@@ -23,7 +23,16 @@ namespace spic {
              * @return Pointer to GameObject, or nullptr if not found.
              * @spicapi
              */
-            static std::shared_ptr<GameObject> Find(const std::string& name);
+             template<class T>
+            static std::shared_ptr<T> Find(const std::string& name) {
+                for (const std::shared_ptr<GameObject> &gameObject: GameObject::gameObjects) {
+                    if (boost::equal(gameObject->name, name)) {
+                        return std::static_pointer_cast<T>(gameObject);
+                    }
+                }
+
+                return nullptr;
+            }
 
             /**
              * @brief Returns a vector of active GameObjects tagged tag. Returns empty
@@ -50,12 +59,12 @@ namespace spic {
              */
             template<class T>
             static std::shared_ptr<T> FindObjectOfType(bool includeInactive = false) {
-                std::vector<std::shared_ptr<T>> foundObjectsOfType = FindObjectsOfType<T>(includeInactive).front();
+                std::vector<std::shared_ptr<T>> foundObjectsOfType = FindObjectsOfType<T>(includeInactive);
 
                 if (foundObjectsOfType.empty()) return nullptr;
 
 
-                return foundObjectsOfType.front();
+                return std::static_pointer_cast<T>(foundObjectsOfType.front());
             }
 
             /**
