@@ -33,15 +33,26 @@ namespace spic {
             [[nodiscard]] double Fps() const;
 
             /**
-            * @brief Get the next sprite from the animation.
-            * This could result in the same sprite depending on _looping & isPlaying
+            * @brief Get the next sprite from the animation (based on fps/time).\n
+            * This could result in the same sprite depending looping & isPlaying\n
+            * @return The currentsprite (after updating animation (time-based)
             * @spicapi
             */
             std::shared_ptr<spic::Sprite> GetSprite();
 
             /**
-            * @brief Get the current sprite from the animation.
+            * @brief Get the next sprite from the animation.\n
+            * This could result in the same sprite depending looping & isPlaying\n
+            * This \b forces the animation to update, regardless of timeframe since last animation update.
+            * @return The currentsprite (after updating animation)
+            * @spicapi
+            */
+            std::shared_ptr<spic::Sprite> NextSprite();
+
+            /**
+            * @brief Get the current sprite from the animation.\n
             * Can be used to manipulate the currentSprite (FlipX,FlipY etc.)
+            * @return The current sprite
             * @spicapi
             */
             std::shared_ptr<spic::Sprite> CurrentSprite();
