@@ -4,6 +4,7 @@
 #include <vector>
 #include "Component.hpp"
 #include "Sprite.hpp"
+#include <memory>
 
 namespace spic {
 
@@ -12,7 +13,7 @@ namespace spic {
      */
     class Animator : public Component {
         public:
-            Animator(int fps, std::vector<Sprite> sprites) : Component(), fps(fps), _looping(true), sprites(std::move(sprites)) {};
+            Animator(double fps, std::vector<std::shared_ptr<Sprite>> sprites) : Component(), fps(fps), _looping(true), sprites(std::move(sprites)), secondsSinceLastFrame(0) {};
 
             /**
              * @brief Start playing the image sequence.
@@ -28,21 +29,45 @@ namespace spic {
              */
             void Stop();
 
-            void Fps(int fps);
-            [[nodiscard]] int Fps() const;
+            void Fps(double fps);
+            [[nodiscard]] double Fps() const;
 
-            const Sprite & CurrentSprite();
+            /**
+            * @brief Get the next sprite from the animation (based on fps/time).\n
+            * This could result in the same sprite depending looping & isPlaying\n
+            * @return The currentsprite (after updating animation (time-based)
+            * @spicapi
+            */
+            std::shared_ptr<spic::Sprite> GetSprite();
+
+            /**
+            * @brief Get the next sprite from the animation.\n
+            * This could result in the same sprite depending looping & isPlaying\n
+            * This \b forces the animation to update, regardless of timeframe since last animation update.
+            * @return The currentsprite (after updating animation)
+            * @spicapi
+            */
+            std::shared_ptr<spic::Sprite> NextSprite();
+
+            /**
+            * @brief Get the current sprite from the animation.\n
+            * Can be used to manipulate the currentSprite (FlipX,FlipY etc.)
+            * @return The current sprite
+            * @spicapi
+            */
+            std::shared_ptr<spic::Sprite> CurrentSprite();
         private:
             /**
              * @brief frames per second (playing speed)
              * @spicapi
              */
-            int fps;
+            double fps;
+            double secondsSinceLastFrame;
             bool isPlaying{};
             bool _looping;
             size_t currentFrame{};
 
-            std::vector<Sprite> sprites{};
+            std::vector<std::shared_ptr<Sprite>> sprites{};
     };
 
 }
