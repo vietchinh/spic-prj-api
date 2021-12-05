@@ -24,8 +24,9 @@ namespace spic {
          */
         virtual void Active(bool flag) { active = flag; }
 
-        bool operator==(const Component& other) const;
-        bool operator!=(const Component& other) const;
+        bool operator==(const Component &other) const;
+
+        bool operator!=(const Component &other) const;
 
         static int nextAvailableId;
 

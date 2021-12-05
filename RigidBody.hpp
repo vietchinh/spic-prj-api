@@ -19,29 +19,33 @@ namespace spic {
      * @brief A component representing a rigid body.
      */
     class RigidBody : public Component {
-        public:
-            /**
-             * @brief Apply force to this rigid body.
-             * @param forceDirection A point, used as a vector to indicate direction
-             *        and magnitude of the force to be applied.
-             * @spicapi
-             */
-            void AddForce(const Point& forceDirection);
+    public:
+        /**
+         * @brief Apply force to this rigid body.
+         * @param forceDirection A point, used as a vector to indicate direction
+         *        and magnitude of the force to be applied.
+         * @spicapi
+         */
+        void AddForce(const Point &forceDirection);
 
-            void Mass(double newMass);
-            [[nodiscard]] double Mass() const;
+        void Mass(double newMass);
 
-            void GravityScale(double newGravityScale);
-            [[nodiscard]] double GravityScale() const;
+        [[nodiscard]] double Mass() const;
 
-            void BodyTypeRB(spic::BodyType bodyType);
-            [[nodiscard]] spic::BodyType BodyTypeRB() const;
+        void GravityScale(double newGravityScale);
 
-            RigidBody(double mass, double gravityScale, spic::BodyType bodyType);
-        private:
-            double mass;
-            double gravityScale;
-            BodyType bodyType;
+        [[nodiscard]] double GravityScale() const;
+
+        void BodyTypeRB(spic::BodyType bodyType);
+
+        [[nodiscard]] spic::BodyType BodyTypeRB() const;
+
+        RigidBody(double mass, double gravityScale, spic::BodyType bodyType);
+
+    private:
+        double mass;
+        double gravityScale;
+        BodyType bodyType;
     };
 
 }

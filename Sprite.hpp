@@ -12,33 +12,39 @@ namespace spic {
      * @spicapi
      */
     class Sprite : public Component {
-        private:
-            std::string sprite;
-            Color color;
-            bool flipX;
-            bool flipY;
-            int sortingLayer;
-            int orderInLayer;
-        public:
-            void SortingLayer(int newSortingLayer);
-            int SortingLayer() const;
+    private:
+        std::string sprite;
+        Color color;
+        bool flipX;
+        bool flipY;
+        int sortingLayer;
+        int orderInLayer;
+    public:
+        void SortingLayer(int newSortingLayer);
 
-            void OrderInLayer(int newOrderInLayer);
-            int OrderInLayer() const;
+        int SortingLayer() const;
 
-            void FlipX(bool newFlipX);
-            bool FlipX() const;
+        void OrderInLayer(int newOrderInLayer);
 
-            void FlipY(bool newFlipY);
-            bool FlipY() const;
+        int OrderInLayer() const;
 
-            void SpriteColor(Color newColor);
-            Color SpriteColor() const;
+        void FlipX(bool newFlipX);
 
-            void SpriteSrc(const std::string& newSprite);
-            std::string SpriteSrc() const;
+        bool FlipX() const;
 
-            Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer);
+        void FlipY(bool newFlipY);
+
+        bool FlipY() const;
+
+        void SpriteColor(Color newColor);
+
+        Color SpriteColor() const;
+
+        void SpriteSrc(const std::string &newSprite);
+
+        std::string SpriteSrc() const;
+
+        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer);
     };
 }
 

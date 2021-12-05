@@ -10,17 +10,22 @@ namespace spic {
      * @spicapi
      */
     class UIObject : public GameObject {
-        private:
-            double width;
-            double height;
-        public:
-            explicit UIObject(const std::vector<std::shared_ptr<Component>>& components = {}, const std::string& parentName = "", const std::string& name = "", const std::string& tag = "", bool active = true, int layer = 0, double newWidth = 0, double newHeight = 0, bool autoInsert = false);
+    private:
+        double width;
+        double height;
+    public:
+        explicit UIObject(const std::vector<std::shared_ptr<Component>> &components = {},
+                          const std::string &parentName = "", const std::string &name = "", const std::string &tag = "",
+                          bool active = true, int layer = 0, double newWidth = 0, double newHeight = 0,
+                          bool autoInsert = false);
 
-            void Width(double newWidth);
-            [[nodiscard]] double Width() const;
+        void Width(double newWidth);
 
-            void Height(double newHeight);
-            [[nodiscard]] double Height() const;
+        [[nodiscard]] double Width() const;
+
+        void Height(double newHeight);
+
+        [[nodiscard]] double Height() const;
     };
 
 }

@@ -27,15 +27,19 @@ namespace spic {
         void Stop();
 
         std::string AudioClip() const;
-        void AudioClip(const std::string & audioClip);
+
+        void AudioClip(const std::string &audioClip);
 
         bool PlayOnAwake() const;
+
         void PlayOnAwake(bool playOnAwake);
 
         bool Loop() const;
+
         void Loop(bool loop);
 
         double Volume() const;
+
         void Volume(double volume);
 
     private:
