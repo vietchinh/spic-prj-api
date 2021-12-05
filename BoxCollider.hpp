@@ -38,6 +38,7 @@ namespace spic {
              */
             void Height(double newHeight) { height = newHeight; }
 
+            BoxCollider(double newHeight, double newWidth) : Collider(), height(newHeight), width(newWidth){}
         private:
             double width;
             double height;
