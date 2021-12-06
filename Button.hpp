@@ -31,7 +31,7 @@ namespace spic {
          */
         void OnClick(std::function<void()> callback) { onClick = std::move(callback); }
 
-        bool isInteractable() const;
+        bool IsInteractable() const;
 
     private:
         /**
