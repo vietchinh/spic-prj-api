@@ -58,6 +58,11 @@ namespace spic {
          * @brief Audio volume, between 0.0 and 1.0.
          */
         double volume;
+		
+        /**
+         * @brief Whether or not the audio is playing.
+         */
+        bool isPlaying;
     };
 
 }
