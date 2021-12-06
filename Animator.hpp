@@ -58,6 +58,13 @@ namespace spic {
             std::shared_ptr<spic::Sprite> CurrentSprite();
         private:
             /**
+            * @brief reset the current frame if the last sprite is surpassed.\n
+            * This function would start with the first frame if looping is true, or will stop at the last frame if looping is false.
+            * @return The sprite that must be showed, or nullpointer if the animation starts over.
+            * @spicapi
+            */
+            std::shared_ptr<spic::Sprite> resetCurrentFrame();
+            /**
              * @brief frames per second (playing speed)
              * @spicapi
              */
