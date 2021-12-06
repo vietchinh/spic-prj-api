@@ -42,6 +42,7 @@ namespace spic {
 
         void Volume(double volume);
 
+		bool IsPlaying() const;
     private:
         /**
          * @brief Path to a locally stored audio file.
@@ -62,6 +63,11 @@ namespace spic {
          * @brief Audio volume, between 0.0 and 1.0.
          */
         double volume;
+		
+        /**
+         * @brief Whether or not the audio is playing.
+         */
+        bool isPlaying;
     };
 
 }
