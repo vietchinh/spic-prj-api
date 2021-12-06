@@ -38,6 +38,7 @@ namespace spic {
         double Volume() const;
         void Volume(double volume);
 
+		bool IsPlaying() const;
     private:
         /**
          * @brief Path to a locally stored audio file.
