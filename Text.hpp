@@ -23,29 +23,38 @@ namespace spic {
      * @spicapi
      */
     class Text : public UIObject {
-        private:
-            std::string text;
-            std::string font;
-            int size;
-            Alignment alignment;
-            Color color;
-        public:
-            explicit Text(std::string font, std::string text, const std::vector<std::shared_ptr<Component>>& components = {}, const std::string& parentName = "", const std::string& name = "", const std::string& tag = "", Alignment alignment = Alignment::left, const Color &color = Color::black(), bool active = true, int layer = 1, int size = 3, double width = 60, double height = 15);
+    private:
+        std::string text;
+        std::string font;
+        int size;
+        Alignment alignment;
+        Color color;
+    public:
+        explicit Text(std::string font, std::string text,
+                      const std::vector<std::shared_ptr<Component>> &components = {},
+                      const std::string &parentName = "", const std::string &name = "", const std::string &tag = "",
+                      Alignment alignment = Alignment::left, const Color &color = Color::black(), bool active = true,
+                      int layer = 1, int size = 3, double width = 60, double height = 15);
 
-            void TextString(const std::string & newText);
-            [[nodiscard]] const std::string & TextString() const;
+        void TextString(const std::string &newText);
 
-            void Font(const std::string & newFont);
-            [[nodiscard]] const std::string & Font() const;
+        [[nodiscard]] const std::string &TextString() const;
 
-            void Size(int newSize);
-            [[nodiscard]] int Size() const;
+        void Font(const std::string &newFont);
 
-            void AlignmentValue(const spic::Alignment & newAlignment);
-            [[nodiscard]] const spic::Alignment & AlignmentValue() const;
+        [[nodiscard]] const std::string &Font() const;
 
-            void ColorValue(const spic::Color & newColor);
-            [[nodiscard]] const spic::Color & ColorValue() const;
+        void Size(int newSize);
+
+        [[nodiscard]] int Size() const;
+
+        void AlignmentValue(const spic::Alignment &newAlignment);
+
+        [[nodiscard]] const spic::Alignment &AlignmentValue() const;
+
+        void ColorValue(const spic::Color &newColor);
+
+        [[nodiscard]] const spic::Color &ColorValue() const;
     };
 
 }

@@ -9,38 +9,40 @@ namespace spic {
      * @brief A collider which represents a rectangular collision area.
      */
     class BoxCollider : public Collider {
-        public:
-            /**
-             * @brief The collider's width
-             * @return The current width
-             * @spicapi
-             */
-            double Width() const { return width; }
+    public:
+        /**
+         * @brief The collider's width
+         * @return The current width
+         * @spicapi
+         */
+        double Width() const { return width; }
 
-            /**
-             * @brief The collider's width
-             * @param newWidth The desired width
-             * @spicapi
-             */
-            void Width(double newWidth) { width = newWidth; }
+        /**
+         * @brief The collider's width
+         * @param newWidth The desired width
+         * @spicapi
+         */
+        void Width(double newWidth) { width = newWidth; }
 
-            /**
-             * @brief The collider's height
-             * @return The current height
-             * @spicapi
-             */
-            double Height() const { return height; }
+        /**
+         * @brief The collider's height
+         * @return The current height
+         * @spicapi
+         */
+        double Height() const { return height; }
 
-            /**
-             * @brief The collider's height
-             * @param newHeight The desired height
-             * @spicapi
-             */
-            void Height(double newHeight) { height = newHeight; }
+        /**
+         * @brief The collider's height
+         * @param newHeight The desired height
+         * @spicapi
+         */
+        void Height(double newHeight) { height = newHeight; }
 
-        private:
-            double width;
-            double height;
+        BoxCollider(double newHeight, double newWidth) : Collider(), height(newHeight), width(newWidth) {}
+
+    private:
+        double width;
+        double height;
     };
 
 }

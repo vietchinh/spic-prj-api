@@ -3,6 +3,7 @@
 
 #include "UIObject.hpp"
 #include <functional>
+#include <utility>
 
 namespace spic {
 
@@ -10,7 +11,7 @@ namespace spic {
      * @brief Instances of this class are clickable user interface items.
      */
     class Button : public UIObject {
-        public:
+    public:
         explicit Button(const std::vector<std::shared_ptr<Component>> &components, const std::string &parentName,
                         const std::string &name, const std::string &tag, bool active, int layer, double width,
                         double height, std::function<void()> callback);
@@ -20,28 +21,28 @@ namespace spic {
              *        will trigger a call to the registered onClick member.
              * @spicapi
              */
-            void Click();
+        void Click();
 
-            /**
-             * @brief Register the onClick handler to be used when the button is clicked.
-             * @param callback The function to register, usually a lambda. But this can be
-             *        any kind of callable.
-             * @spicapi
-             */
-            void OnClick(std::function<void()> callback) { onClick = callback; }
+        /**
+         * @brief Register the onClick handler to be used when the button is clicked.
+         * @param callback The function to register, usually a lambda. But this can be
+         *        any kind of callable.
+         * @spicapi
+         */
+        void OnClick(std::function<void()> callback) { onClick = std::move(callback); }
 
-            bool isInteractable() const;
+        bool IsInteractable() const;
 
-        private:
-            /**
-             * @brief When false, the button will not react to clicks.
-             */
-            bool interactable;
+    private:
+        /**
+         * @brief When false, the button will not react to clicks.
+         */
+        bool interactable;
 
-            /**
-             * @brief The registered click handler.
-             */
-            std::function<void()> onClick;
+        /**
+         * @brief The registered click handler.
+         */
+        std::function<void()> onClick;
     };
 
 }
