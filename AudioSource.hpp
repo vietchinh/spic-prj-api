@@ -42,7 +42,7 @@ namespace spic {
 
         void Volume(double volume);
 
-        bool IsPlaying() const;
+        bool ShouldPlay() const;
 
     private:
         /**
@@ -66,9 +66,9 @@ namespace spic {
         double volume;
 
         /**
-         * @brief Whether or not the audio is playing.
+         * @brief Whether or not the audio should be played.
          */
-        bool isPlaying;
+        bool shouldPlay;
     };
 
 }
