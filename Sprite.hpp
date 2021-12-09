@@ -3,7 +3,10 @@
 
 #include "Component.hpp"
 #include "Color.hpp"
+#include "Transform.hpp"
 #include <string>
+#include <o_real_physics/physics_vector.hpp>
+#include <components/SizeComponent.hpp>
 
 namespace spic {
 
@@ -19,6 +22,7 @@ namespace spic {
         bool flipY;
         int sortingLayer;
         int orderInLayer;
+        o_real_engine::SizeComponent _size;
     public:
         void SortingLayer(int newSortingLayer);
 
@@ -44,7 +48,18 @@ namespace spic {
 
         std::string SpriteSrc() const;
 
-        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer);
+        /**
+        * Gets the sprites size information (with and height)
+        * @return A const reference of the body's Size object
+        */
+        const o_real_engine::SizeComponent &GetSize();
+
+        /**
+        * Sets the sprites size information (with and height)
+        */
+        void SetSize(o_real_engine::SizeComponent newSizeComponent);
+
+        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::SizeComponent sizeComponent);
     };
 }
 
