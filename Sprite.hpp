@@ -4,6 +4,8 @@
 #include "Component.hpp"
 #include "Color.hpp"
 #include <string>
+#include <components/SizeComponent.hpp>
+#include <o_real_engine/shapes/o_real_rect.hpp>
 
 namespace spic {
 
@@ -19,6 +21,7 @@ namespace spic {
         bool flipY;
         int sortingLayer;
         int orderInLayer;
+        o_real_engine::ORealRect _size;
     public:
         void SortingLayer(int newSortingLayer);
 
@@ -44,7 +47,13 @@ namespace spic {
 
         std::string SpriteSrc() const;
 
-        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer);
+        /**
+        * Gets the sprites size information (with and height)
+        * @return A const reference of the body's Size object
+        */
+        const o_real_engine::ORealRect &GetSize();
+
+        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::ORealRect size);
     };
 }
 
