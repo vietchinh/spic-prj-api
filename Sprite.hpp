@@ -3,7 +3,6 @@
 
 #include "Component.hpp"
 #include "Color.hpp"
-#include "Transform.hpp"
 #include <string>
 #include <o_real_physics/physics_vector.hpp>
 #include <components/SizeComponent.hpp>
@@ -59,7 +58,7 @@ namespace spic {
         */
         void SetSize(o_real_engine::SizeComponent newSizeComponent);
 
-        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::SizeComponent sizeComponent );
+        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::SizeComponent sizeComponent);
     };
 }
 
