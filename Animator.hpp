@@ -59,6 +59,17 @@ namespace spic {
         */
         std::shared_ptr<spic::Sprite> CurrentSprite();
 
+        /**
+        * @brief Change FlipX of all sprites in the animator
+        * @spicapi
+        */
+        void FlipX(bool newFlipX);
+
+        /**
+        * @brief Change FlipY of all sprites in the animator
+        * @spicapi
+        */
+        void FlipY(bool newFlipY);
     private:
         /**
         * @brief reset the current frame if the last sprite is surpassed.\n
