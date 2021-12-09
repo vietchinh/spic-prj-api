@@ -59,7 +59,7 @@ namespace spic {
         */
         void SetSize(o_real_engine::SizeComponent newSizeComponent);
 
-        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::SizeComponent sizeComponent);
+        Sprite(std::string sprite, Color color, bool flipX, bool flipY, int sortingLayer, int orderInLayer, o_real_engine::SizeComponent sizeComponent );
     };
 }
 
